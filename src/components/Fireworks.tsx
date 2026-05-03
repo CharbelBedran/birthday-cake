@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   BufferAttribute,
   BufferGeometry,
@@ -53,7 +53,7 @@ export function Fireworks({ isActive, origin = [0, 5, -14] }: FireworksProps) {
     };
   }
 
-  const resetParticle = (index: number) => {
+  const resetParticle = useCallback((index: number) => {
     const {
       positions,
       velocities,
@@ -96,13 +96,13 @@ export function Fireworks({ isActive, origin = [0, 5, -14] }: FireworksProps) {
 
     lifetimes[index] = 1.6 + Math.random() * 1.3;
     ages[index] = -Math.random() * 1.2;
-  };
+  }, [baseOrigin]);
 
   useEffect(() => {
     for (let i = 0; i < TOTAL_PARTICLES; i += 1) {
       resetParticle(i);
     }
-  }, []);
+  }, [resetParticle]);
 
   useFrame((_, delta) => {
     const geometry = geometryRef.current;

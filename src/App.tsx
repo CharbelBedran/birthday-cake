@@ -17,6 +17,7 @@ import { Table } from "./models/table";
 import { PictureFrame } from "./models/pictureFrame";
 import { Fireworks } from "./components/Fireworks";
 import { BirthdayCard } from "./components/BirthdayCard";
+import { assetUrl } from "./utils/assetUrl";
 
 import "./App.css";
 
@@ -99,7 +100,7 @@ type BirthdayCardConfig = {
 const BIRTHDAY_CARDS: ReadonlyArray<BirthdayCardConfig> = [
   {
     id: "confetti",
-    image: "/img.png",
+    image: assetUrl("/img.png"),
     position: [1, 0.081, -2],
     rotation: [-Math.PI / 2 , 0, Math.PI / 3],
   }
@@ -267,14 +268,14 @@ function AnimatedScene({
       <group ref={tableGroup}>
         <Table />
         <PictureFrame
-          image="/candice -1.jpeg"
+          image={assetUrl("/candice -1.jpeg")}
           position={[0, 0.735, 3]}
           rotation={[0, 5.6, 0]}
           scale={0.75}
           onImageClick={onImageClick}
         />
         <PictureFrame
-          image="/candice-2.jpeg"
+          image={assetUrl("/candice-2.jpeg")}
           position={[0, 0.735, -3]}
           rotation={[0, 4.0, 0]}
           scale={0.75}
@@ -282,7 +283,7 @@ function AnimatedScene({
         />
         
         <PictureFrame
-          image="/coeur.jpeg"
+          image={assetUrl("/coeur.jpeg")}
           position={[-1.5, 0.735, -2.5]}
           rotation={[0, 4.2, 0]}
           scale={0.75}
@@ -383,7 +384,7 @@ export default function App() {
   const isCandleLitRef = useRef(true);
 
   useEffect(() => {
-    const audio = new Audio("/music.mp3");
+    const audio = new Audio(assetUrl("/music.mp3"));
     audio.loop = true;
     audio.preload = "auto";
     backgroundAudioRef.current = audio;
@@ -652,7 +653,7 @@ export default function App() {
           <ambientLight intensity={(1 - environmentProgress) * 0.8} />
           <directionalLight intensity={0.5} position={[2, 10, 0]} color={[1, 0.9, 0.95]}/>
           <Environment
-            files={["/shanghai_bund_4k.hdr"]}
+            files={[assetUrl("/shanghai_bund_4k.hdr")]}
             backgroundRotation={[0, 3.3, 0]}
             environmentRotation={[0, 3.3, 0]}
             background
